@@ -1,8 +1,7 @@
 # Next.js SaaS Starter
 
-This is a starter template for building a SaaS application using **Next.js** with support for authentication, Stripe integration for payments, and a dashboard for logged-in users.
+This is a personal Saas application designed based on the open source SaaS-Starter in GitHub. Source:[https://next-saas-start.vercel.app/](https://next-saas-start.vercel.app/)
 
-**Demo: [https://next-saas-start.vercel.app/](https://next-saas-start.vercel.app/)**
 
 ## Features
 
