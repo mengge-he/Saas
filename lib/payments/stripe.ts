@@ -46,6 +46,52 @@ export async function createCheckoutSession({
   redirect(session.url!);
 }
 
+export async function createPlanCheckoutSession({
+  team,
+  productName,
+  unitAmountCents
+}: {
+  team: Team | null;
+  productName: string;
+  unitAmountCents: number;
+}) {
+  const user = await getUser();
+
+  if (!team || !user) {
+    redirect('/sign-in');
+  }
+
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    line_items: [
+      {
+        price_data: {
+          currency: 'usd',
+          unit_amount: unitAmountCents,
+          recurring: {
+            interval: 'year'
+          },
+          product_data: {
+            name: productName
+          }
+        },
+        quantity: 1
+      }
+    ],
+    mode: 'subscription',
+    success_url: `${process.env.BASE_URL}/api/stripe/checkout?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.BASE_URL}/pricing`,
+    customer: team.stripeCustomerId || undefined,
+    client_reference_id: user.id.toString(),
+    allow_promotion_codes: true,
+    subscription_data: {
+      trial_period_days: 14
+    }
+  });
+
+  redirect(session.url!);
+}
+
 export async function createCustomerPortalSession(team: Team) {
   if (!team.stripeCustomerId || !team.stripeProductId) {
     redirect('/pricing');

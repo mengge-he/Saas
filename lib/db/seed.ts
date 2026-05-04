@@ -1,3 +1,4 @@
+import { eq } from 'drizzle-orm';
 import { stripe } from '../payments/stripe';
 import { db } from './drizzle';
 import { users, teams, teamMembers } from './schema';
@@ -44,13 +45,24 @@ async function seed() {
   const password = 'admin123';
   const passwordHash = await hashPassword(password);
 
+  const [existingUser] = await db
+    .select()
+    .from(users)
+    .where(eq(users.email, email))
+    .limit(1);
+
+  if (existingUser) {
+    console.log('Seed user already exists; skipping user, team, and Stripe seed.');
+    return;
+  }
+
   const [user] = await db
     .insert(users)
     .values([
       {
         email: email,
         passwordHash: passwordHash,
-        role: "owner",
+        role: 'owner',
       },
     ])
     .returning();
@@ -74,11 +86,11 @@ async function seed() {
 }
 
 seed()
+  .then(() => {
+    console.log('Seed process finished. Exiting...');
+    process.exit(0);
+  })
   .catch((error) => {
     console.error('Seed process failed:', error);
     process.exit(1);
-  })
-  .finally(() => {
-    console.log('Seed process finished. Exiting...');
-    process.exit(0);
   });

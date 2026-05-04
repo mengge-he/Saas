@@ -1,93 +1,52 @@
-import { checkoutAction } from '@/lib/payments/actions';
 import { Check } from 'lucide-react';
-import { getStripePrices, getStripeProducts } from '@/lib/payments/stripe';
-import { SubmitButton } from './submit-button';
+import { checkoutPricingPlanAction } from '@/lib/payments/actions';
+import { PRICING_PLANS } from '@/lib/payments/pricing-plans';
 
-// Prices are fresh for one hour max
-export const revalidate = 3600;
-
-export default async function PricingPage() {
-  const [prices, products] = await Promise.all([
-    getStripePrices(),
-    getStripeProducts(),
-  ]);
-
-  const basePlan = products.find((product) => product.name === 'Base');
-  const plusPlan = products.find((product) => product.name === 'Plus');
-
-  const basePrice = prices.find((price) => price.productId === basePlan?.id);
-  const plusPrice = prices.find((price) => price.productId === plusPlan?.id);
-
+export default function PricingPage() {
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="grid md:grid-cols-2 gap-8 max-w-xl mx-auto">
-        <PricingCard
-          name={basePlan?.name || 'Base'}
-          price={basePrice?.unitAmount || 800}
-          interval={basePrice?.interval || 'month'}
-          trialDays={basePrice?.trialPeriodDays || 7}
-          features={[
-            'Unlimited Usage',
-            'Unlimited Workspace Members',
-            'Email Support',
-          ]}
-          priceId={basePrice?.id}
-        />
-        <PricingCard
-          name={plusPlan?.name || 'Plus'}
-          price={plusPrice?.unitAmount || 1200}
-          interval={plusPrice?.interval || 'month'}
-          trialDays={plusPrice?.trialPeriodDays || 7}
-          features={[
-            'Everything in Base, and:',
-            'Early Access to New Features',
-            '24/7 Support + Slack Access',
-          ]}
-          priceId={plusPrice?.id}
-        />
+      <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-3 max-w-6xl mx-auto">
+        {PRICING_PLANS.map((plan) => (
+          <PricingCard key={plan.slug} plan={plan} />
+        ))}
       </div>
     </main>
   );
 }
 
-function PricingCard({
-  name,
-  price,
-  interval,
-  trialDays,
-  features,
-  priceId,
-}: {
-  name: string;
-  price: number;
-  interval: string;
-  trialDays: number;
-  features: string[];
-  priceId?: string;
-}) {
+function PricingCard({ plan }: { plan: (typeof PRICING_PLANS)[number] }) {
   return (
-    <div className="pt-6">
-      <h2 className="text-2xl font-medium text-gray-900 mb-2">{name}</h2>
-      <p className="text-sm text-gray-600 mb-4">
-        with {trialDays} day free trial
-      </p>
-      <p className="text-4xl font-medium text-gray-900 mb-6">
-        ${price / 100}{' '}
-        <span className="text-xl font-normal text-gray-600">
-          per user / {interval}
-        </span>
-      </p>
-      <ul className="space-y-4 mb-8">
-        {features.map((feature, index) => (
+    <div className="pt-6 flex flex-col">
+      <h2 className="text-2xl font-medium text-gray-900 mb-4">{plan.name}</h2>
+      <div className="grid grid-cols-2 gap-6 mb-8">
+        <div>
+          <p>&nbsp;</p>
+          <p className="text-gray-900">{plan.everyTwoWeeks}</p>
+          <p className="text-gray-900">every 2 weeks</p>
+        </div>
+        <div>
+          <p className="text-gray-900">Total amount</p>
+          <p className="text-gray-900">{plan.yearlyTotal}</p>
+          <p className="text-gray-900">per year</p>
+        </div>
+      </div>
+      <p className="text-base text-gray-500 mb-4">{plan.description}</p>
+      <ul className="space-y-3 mb-8">
+        {plan.features.map((feature, index) => (
           <li key={index} className="flex items-start">
             <Check className="h-5 w-5 text-orange-500 mr-2 mt-0.5 flex-shrink-0" />
             <span className="text-gray-700">{feature}</span>
           </li>
         ))}
       </ul>
-      <form action={checkoutAction}>
-        <input type="hidden" name="priceId" value={priceId} />
-        <SubmitButton />
+      <form action={checkoutPricingPlanAction} className="mt-auto">
+        <input type="hidden" name="planSlug" value={plan.slug} />
+        <button
+          type="submit"
+          className="block w-fit min-w-56 rounded-full bg-black px-8 py-3 text-center text-base font-medium text-white hover:bg-gray-900"
+        >
+          Continue with this
+        </button>
       </form>
     </div>
   );

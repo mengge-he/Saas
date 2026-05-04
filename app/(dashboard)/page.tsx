@@ -5,38 +5,41 @@ import { Terminal } from './terminal';
 export default function HomePage() {
   return (
     <main>
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        className="relative py-20 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/images/hero-gym.png')" }}
+      >
+        <div className="absolute inset-0 bg-black/45" aria-hidden="true" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-12 lg:gap-8">
             <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
-              <h1 className="text-4xl font-bold text-gray-900 tracking-tight sm:text-5xl md:text-6xl">
-                Build Your SaaS
-                <span className="block text-orange-500">Faster Than Ever</span>
+              <h1 className="text-4xl font-bold text-white tracking-tight sm:text-5xl md:text-6xl">
+                Build Your Body
+                <span className="block text-orange-400">Faster Than Ever</span>
               </h1>
-              <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                Launch your SaaS product in record time with our powerful,
-                ready-to-use template. Packed with modern technologies and
-                essential integrations.
+              <p className="mt-3 text-base text-gray-100 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+              STARTING AT JUST
+              $129.75 PER YEAR!
               </p>
               <div className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
                 <a
-                  href="https://vercel.com/templates/next.js/next-js-saas-starter"
+                  href="http://localhost:3000/pricing"
                   target="_blank"
                 >
                   <Button
                     size="lg"
                     variant="outline"
-                    className="text-lg rounded-full"
+                    className="text-lg rounded-full border-white bg-white text-gray-900 hover:bg-white/90 hover:text-gray-900 font-semibold"
                   >
-                    Deploy your own
+                    APPLY NOW
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </a>
               </div>
             </div>
-            <div className="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
+            {/* <div className="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
               <Terminal />
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
@@ -44,7 +47,7 @@ export default function HomePage() {
       <section className="py-16 bg-white w-full">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-3 lg:gap-8">
-            <div>
+            <div className="flex flex-col">
               <div className="flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white">
                 <svg viewBox="0 0 24 24" className="h-6 w-6">
                   <path
@@ -53,44 +56,106 @@ export default function HomePage() {
                   />
                 </svg>
               </div>
-              <div className="mt-5">
+              <div className="mt-5 flex flex-1 flex-col">
                 <h2 className="text-lg font-medium text-gray-900">
-                  Next.js and React
+                  ECONO
                 </h2>
-                <p className="mt-2 text-base text-gray-500">
-                  Leverage the power of modern web technologies for optimal
-                  performance and developer experience.
-                </p>
+                <div className="mt-4 grid grid-cols-2 gap-6">
+                  <div>
+                    <p>&nbsp;</p>
+                    <p className="text-gray-900">$10.99</p>
+                    <p className="text-gray-900">every 2 weeks</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-900">Total amount</p>
+                    <p className="text-gray-900">$285.75</p>
+                    <p className="text-gray-900">per year</p>
+                  </div>
+                </div>
+                <p className="mt-8 text-base text-gray-500">Everything included in the Weekend option, plus:</p>
+                
+                <ul className="mt-2 list-disc pl-5 text-base text-gray-500 space-y-1">
+                  <li>Access to your local gym 7 days a week.</li>             
+                </ul>
+                <a
+                  href="/pricing"
+                  className="mt-auto block w-fit min-w-56 mr-auto translate-y-2 rounded-full bg-black px-8 py-3 text-center text-base font-medium text-white"
+                >
+                  Join now
+                </a>
               </div>
             </div>
 
-            <div className="mt-10 lg:mt-0">
+            <div className="mt-10 lg:mt-0 flex flex-col">
               <div className="flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white">
                 <Database className="h-6 w-6" />
               </div>
-              <div className="mt-5">
+              <div className="mt-5 flex flex-1 flex-col">
                 <h2 className="text-lg font-medium text-gray-900">
-                  Postgres and Drizzle ORM
+                  PLATNIUM
                 </h2>
-                <p className="mt-2 text-base text-gray-500">
-                  Robust database solution with an intuitive ORM for efficient
-                  data management and scalability.
-                </p>
+                <div className="mt-4 grid grid-cols-2 gap-6">
+                  <div>
+                    <p>&nbsp;</p>
+                    <p className="text-gray-900">$10.99</p>
+                    <p className="text-gray-900">every 2 weeks</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-900">Total amount</p>
+                    <p className="text-gray-900">$285.75</p>
+                    <p className="text-gray-900">per year</p>
+                  </div>
+                </div>
+                <p className="mt-8 text-base text-gray-500">Everything included in the Weekend option, plus:</p>
+                
+                <ul className="mt-2 list-disc pl-5 text-base text-gray-500 space-y-1">
+                  <li>Unlimited access to all gyms.</li>
+                  <li>24/7 access*.</li> 
+                  <li>Access to the Recovery Platinum Zone.</li>
+                  <li>Access to the Platinum Workout Zone*</li>
+                  <li>Share your membership card.</li>
+                </ul>
+                <a
+                  href="/pricing"
+                  className="mt-auto block w-fit min-w-56 mr-auto translate-y-2 rounded-full bg-black px-8 py-3 text-center text-base font-medium text-white"
+                >
+                  Join now
+                </a>
               </div>
             </div>
 
-            <div className="mt-10 lg:mt-0">
+            <div className="mt-10 lg:mt-0 flex flex-col">
               <div className="flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white">
                 <CreditCard className="h-6 w-6" />
               </div>
-              <div className="mt-5">
+              <div className="mt-5 flex flex-1 flex-col">
                 <h2 className="text-lg font-medium text-gray-900">
-                  Stripe Integration
+                  EXTRA(Group Classes)
                 </h2>
-                <p className="mt-2 text-base text-gray-500">
-                  Seamless payment processing and subscription management with
-                  industry-leading Stripe integration.
-                </p>
+                <div className="mt-4 grid grid-cols-2 gap-6">
+                  <div>
+                    <p>&nbsp;</p>
+                    <p className="text-gray-900">$10.99</p>
+                    <p className="text-gray-900">every 2 weeks</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-900">Total amount</p>
+                    <p className="text-gray-900">$285.75</p>
+                    <p className="text-gray-900">per year</p>
+                  </div>
+                </div>
+                <p className="mt-8 text-base text-gray-500">Everything included in the Weekend option, plus:</p>
+                
+                <ul className="mt-2 list-disc pl-5 text-base text-gray-500 space-y-1">
+                  <li>Unlimited group classes with coach.</li>
+                  <li>Unlimited access to Zumba classes.</li>                 
+                </ul>
+                <a
+                  href="/pricing"
+                  className="mt-auto block w-fit min-w-56 mr-auto translate-y-2 rounded-full bg-black px-8 py-3 text-center text-base font-medium text-white"
+                >
+                  Join now
+                </a>
               </div>
             </div>
           </div>
@@ -102,7 +167,7 @@ export default function HomePage() {
           <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                Ready to launch your SaaS?
+                Ready to build your body?
               </h2>
               <p className="mt-3 max-w-3xl text-lg text-gray-500">
                 Our template provides everything you need to get your SaaS up
@@ -111,13 +176,13 @@ export default function HomePage() {
               </p>
             </div>
             <div className="mt-8 lg:mt-0 flex justify-center lg:justify-end">
-              <a href="https://github.com/nextjs/saas-starter" target="_blank">
+              <a href="/pricing" target="_blank">
                 <Button
                   size="lg"
                   variant="outline"
                   className="text-lg rounded-full"
                 >
-                  View the code
+                  Join now
                   <ArrowRight className="ml-3 h-6 w-6" />
                 </Button>
               </a>
