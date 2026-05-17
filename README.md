@@ -1,6 +1,7 @@
 # Next.js SaaS Starter
 
 This is a personal Saas application designed based on the open source SaaS-Starter in GitHub. Source:[https://next-saas-start.vercel.app/](https://next-saas-start.vercel.app/)
+Deployed on https://saas-sage-alpha.vercel.app/
 
 
 ## Features
