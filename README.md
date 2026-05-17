@@ -84,6 +84,8 @@ To test Stripe payments, use the following test card details:
 
 ## Going to Production
 
+For a deployment checklist tailored to this repo, including the nested folder setup, production environment variables, database migrations, and Stripe webhook setup, see [DEPLOYMENT.md](./DEPLOYMENT.md).
+
 When you're ready to deploy your SaaS application to production, follow these steps:
 
 ### Set up a production Stripe webhook
